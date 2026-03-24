@@ -42,9 +42,10 @@
  * @param {number[][]} grid - The input 2D integer matrix for which we need to construct the product matrix.
  * @return {number[][]} - The product matrix of the input grid, where each element is the product of all other elements in the grid modulo 12345.
  * 
- * A solution to this problem is to first calculate the total product of all elements in the grid. 
- * Then, for each element in the grid, we can compute the corresponding element in the product matrix 
- * by dividing the total product by that element and taking the result modulo 12345.
+ * Division should not be used in the solution as it can lead to issues with the modulo operation, instead we can avoid division in this problem 
+ * by calculating the suffix and prefix products of each element, where the prefix product is the product of every element before the element, and the
+ * suffix product is the product of everything after it. Therefore multiplying the prefix and suffix products of an element give the product of 
+ * every element in the grid expect that element. 
  */
 var constructProductMatrix = function(grid) {
     // Initialising important constants and variables
@@ -55,22 +56,7 @@ var constructProductMatrix = function(grid) {
     let totalProduct = 1;
     let productMatrix = Array.from(Array(gridLength), () => new Array(gridHeight));
 
-    // Calculate the total product of all elements
-    for (let i = 0; i < gridLength; i++) {
-        for (let j = 0; j < gridHeight; j++) {
-            totalProduct *= grid[i][j];
-        }
-    }
-
-    // Calculate the output product matrix
-    for (let i = 0; i < gridLength; i++) {
-        for (let j = 0; j < gridHeight; j++) {
-            let tempProduct = totalProduct / grid[i][j];
-            productMatrix[i][j] = tempProduct % modValue;
-        }
-    }
-
-    return productMatrix;
+    
 };
 
 function runTestCases() {
