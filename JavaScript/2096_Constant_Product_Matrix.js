@@ -1,4 +1,6 @@
-// Problem: 2096 - Constant Product Matrix, Daily Challenge 2026-03-24
+// Problem: 2096 (Leetcode) - Constant Product Matrix, Daily Challenge 2026-03-24
+
+// Solution Status: WIP
 
 /* Problem Description:
 *    Given a 0-indexed 2D integer matrix grid of size n * m, we define a 0-indexed 2D matrix p of size n * m as the product matrix of grid if the following condition is met:
@@ -37,9 +39,36 @@
 
 // Solution:
 /**
- * @param {number[][]} grid
- * @return {number[][]}
+ * @param {number[][]} grid - The input 2D integer matrix for which we need to construct the product matrix.
+ * @return {number[][]} - The product matrix of the input grid, where each element is the product of all other elements in the grid modulo 12345.
+ * 
+ * A solution to this problem is to first calculate the total product of all elements in the grid. 
+ * Then, for each element in the grid, we can compute the corresponding element in the product matrix 
+ * by dividing the total product by that element and taking the result modulo 12345.
  */
 var constructProductMatrix = function(grid) {
-    
+    // Initialising important constants and variables
+    const modValue = 12345;
+    const gridLength = grid.length;
+    const gridHeight = grid.height; // As the grid has a size of n * m, all heights (i.e., length of sub-arrays) are the same
+
+    let totalProduct = 1;
+    let productMatrix = Array.from(Array(gridLength), () => new Array(gridHeight));
+
+    // Calculate the total product of all elements
+    for (let i = 0; i < gridLength; i++) {
+        for (let j = 0; j < gridHeight; j++) {
+            totalProduct *= grid[i][j];
+        }
+    }
+
+    // Calculate the output product matrix
+    for (let i = 0; i < gridLength; i++) {
+        for (let j = 0; j < gridHeight; j++) {
+            let tempProduct = totalProduct / grid[i][j];
+            productMatrix[i][j] = tempProduct % modValue;
+        }
+    }
+
+    return productMatrix;
 };
