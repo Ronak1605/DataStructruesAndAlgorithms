@@ -50,7 +50,7 @@ var constructProductMatrix = function(grid) {
     // Initialising important constants and variables
     const modValue = 12345;
     const gridLength = grid.length;
-    const gridHeight = grid.height; // As the grid has a size of n * m, all heights (i.e., length of sub-arrays) are the same
+    const gridHeight = grid[0].length; // As the grid has a size of n * m, all heights (i.e., length of sub-arrays) are the same
 
     let totalProduct = 1;
     let productMatrix = Array.from(Array(gridLength), () => new Array(gridHeight));
