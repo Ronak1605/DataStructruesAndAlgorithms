@@ -72,3 +72,31 @@ var constructProductMatrix = function(grid) {
 
     return productMatrix;
 };
+
+function runTestCases() {
+    const testCases = [
+        // Passing
+        {
+            input: [[1,2],[3,4]],
+            expected: [[24,12],[8,6]]
+        },
+        // Passing
+        {
+            input: [[12345],[2],[1]],
+            expected: [[2],[0],[0]]
+        },
+        // Failing
+        {
+            input: [[8,18],[24,20],[9,5],[26,26],[19,19],[20,1],[20,23],[15,19],[24,14],[12,15],[22,3],[22,11],[9,25]],
+            expected: [[11625,3795],[12105,4650],[7590,6255],[8325,8325],[4245,4245],[4650,6585],[4650,2970],[2085,4245],[12105,10170],[11865,2085],[3105,10425],[3105,6210],[7590,3720]]
+        }
+    ];
+
+    testCases.forEach(({input, expected}, index) => {
+        const result = constructProductMatrix(input);
+        console.log(`Test Case ${index + 1}:`, JSON.stringify(result) === JSON.stringify(expected) ? 'Passed' : 'Failed');
+    });
+}
+
+// Run the test cases to validate the solution
+runTestCases();
