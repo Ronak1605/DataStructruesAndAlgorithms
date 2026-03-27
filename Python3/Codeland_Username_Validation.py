@@ -1,6 +1,6 @@
 # Problem: Coderbyte - Codeland Username Validation
 
-# Solution Status: WIP
+# Solution Status: Solved and submitted successfully on Coderbyte. 
 
 """
 Problem Description: 
@@ -23,21 +23,30 @@ Output: true
 """
 
 # Solution:
+import re
+
 def CodelandUsernameValidation(strParam):
-    """Validate a username against Codeland's rules.    
+    """Validate a username against Codeland's rules.
     Rules:
     1. Length must be between 4 and 25 characters.
     2. The first character must be a letter.
     3. Allowed characters are letters, digits, and underscore (_).
-    4. The last character cannot be an underscore.  
+    4. The last character cannot be an underscore.
     Args:
-      strParam: Username string to validate.    
+      strParam: Username string to validate.
     Returns:
-      isValid: true if valid, otherwise false.
-    """ 
-    # code goes here
+      "true" if valid, otherwise "false".
+    """
 
-    # keep this function call here 
-    print(CodelandUsernameValidation(input()))
+    # Pattern explanation:
+    # ^[A-Za-z]               - starts with a letter
+    # [A-Za-z0-9_]{2,23}      - middle chararacters are either letters, digits, or underscores, while ensuring a total length of 4-25
+    # [A-Za-z0-9]$            - ends with a letter or digit
+    pattern = r"^[A-Za-z][A-Za-z0-9_]{2,23}[A-Za-z0-9]$"
+
+    return "true" if re.match(pattern, strParam) else "false"
+
+# keep this function call here
+print(CodelandUsernameValidation(input()))
 
 
